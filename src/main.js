@@ -1,3 +1,6 @@
+// import './js/tasks.js';
+// import './js/theme-switcher.js';
+
 /*
   Створи список справ.
   На сторінці є два інпути які має вводиться назва і текст задачі.
@@ -14,3 +17,34 @@
       <p>Текст</p>
   </li>
 */
+import { nanoid } from 'nanoid';
+
+const form = document.querySelector('.header-form');
+form.addEventListener('submit', handleSubmit);
+
+const list = document.querySelector('.task-list');
+
+function handleSubmit(event) {
+  event.preventDefault();
+  const title = event.target.elements.taskName.value;
+  const description = event.target.elements.taskDescription.value;
+  //   console.log(title);
+  //   console.log(description);
+
+  const message = { title, description, id: nanoid() };
+  // console.log(message);
+
+  list.insertAdjacentHTML('beforeend', markupItem());
+}
+
+function markupItem(message) {
+  return `
+  <li class="task-list-item" data-id="${id}">
+      <button class="task-list-item-btn">Delete</button>
+      <h3>${title}</h3>
+      <p>${description}</p>
+  </li>
+  `;
+}
+
+console.log(markupItem);
